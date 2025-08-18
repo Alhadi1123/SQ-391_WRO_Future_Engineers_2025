@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module fritzingVersion="0.9.3b.04.19.5c895d327c44a3114e5fcc9d8260daf0cbb52806" icon="Temp.png">
+    <title>Temp</title>
+    <instances>
+        <instance moduleIdRef="22857-sfe_vr_imu_breakout_bno086_9dof_accelerometer_gyro_magnetometer_86cbbe55ff40493f4d536eadbea26418_4" modelIndex="5753" path="C:/Users/Shaam/Documents/Fritzing/parts/user/22857-sfe_vr_imu_breakout_bno086_9dof_accelerometer_gyro_magnetometer_86cbbe55ff40493f4d536eadbea26418_4.fzp">
+            <views/>
+        </instance>
+        <instance moduleIdRef="adafruit_0da394d8aad5dc82ddc58a7b38fd4427_7" modelIndex="5755" path="C:/Users/Shaam/Documents/Fritzing/parts/user/adafruit_0da394d8aad5dc82ddc58a7b38fd4427_7.fzp">
+            <views/>
+        </instance>
+        <instance moduleIdRef="adafruit_85cecdd9791ec52b2a29adf1da2a7753_1" modelIndex="5757" path="C:/Users/Shaam/Documents/Fritzing/parts/user/adafruit_85cecdd9791ec52b2a29adf1da2a7753_1.fzp">
+            <views/>
+        </instance>
+        <instance moduleIdRef="fan_Ventilador_8d9c1b834fb87e9bd979cc237f408b44_4" modelIndex="5759" path="C:/Users/Shaam/AppData/Roaming/Fritzing/partfactory/8e063e66f4c712a823857ace2ec47ba5/contrib/fan_Ventilador_8d9c1b834fb87e9bd979cc237f408b44_4.fzp">
+            <views/>
+        </instance>
+        <instance moduleIdRef="Lipo_2200mAh_630477a5eb60af771eb930498f3b0bf6_2" modelIndex="5761" path="C:/Users/Shaam/Documents/Fritzing/parts/user/Lipo_2200mAh_630477a5eb60af771eb930498f3b0bf6_2.fzp" flippedSMD="true">
+            <views/>
+        </instance>
+        <instance moduleIdRef="Power Bank Battery (2x USB-A 1x Out USB-C IO)_d2e4bf959f44c91584abd5724e3625f1_2" modelIndex="5763" path="C:/Users/Shaam/Documents/Fritzing/parts/user/Power Bank Battery (2x USB-A 1x Out USB-C IO)_d2e4bf959f44c91584abd5724e3625f1_2.fzp">
+            <views/>
+        </instance>
+        <instance moduleIdRef="prefix0000_893bf5c7f362a3e6e19d4cc45bb6f39f_4" modelIndex="5765" path="C:/Users/Shaam/Documents/Fritzing/parts/user/prefix0000_893bf5c7f362a3e6e19d4cc45bb6f39f_4.fzp">
+            <views/>
+        </instance>
+        <instance moduleIdRef="prefix101246_d7ee9d0b7fb5b121eeaeeb7de2960c52_8" modelIndex="5767" path="C:/Users/Shaam/Documents/Fritzing/parts/user/prefix101246_d7ee9d0b7fb5b121eeaeeb7de2960c52_8.fzp">
+            <views/>
+        </instance>
+        <instance moduleIdRef="raspberry-pi-4B_1" modelIndex="5769" path="C:/Users/Shaam/Documents/Fritzing/parts/user/raspberry-pi-4B_1.fzp">
+            <views/>
+        </instance>
+        <instance moduleIdRef="861ab96bbfb1f3570d24851bafc23a6b" modelIndex="5771" path="C:/Users/Shaam/Documents/Fritzing/parts/contrib/URM47V32__60382df788e9a99a96c6c69ac3f032d6.fzp">
+            <views/>
+        </instance>
+        <instance moduleIdRef="XL4015_DC_DC_CCCV_blue_module_e25d0a1c3fc71bddabf344cff46d2b61_4" modelIndex="5773" path="C:/Users/Shaam/Documents/Fritzing/parts/user/XL4015_DC_DC_CCCV_blue_module_e25d0a1c3fc71bddabf344cff46d2b61_4.fzp">
+            <views/>
+        </instance>
+    </instances>
+</module>
