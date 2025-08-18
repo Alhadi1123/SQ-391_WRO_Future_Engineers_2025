@@ -1,6 +1,6 @@
 <center><h1> SQ-391 WRO 2025 </center>
 
-![Banner](./images/readme/banner.png)
+![Banner](./other/images/readme/logo.png)
 
 [![Website](https://img.shields.io/badge/Website-Visit-brightgreen?style=for-the-badge&logo=web&logoColor=white)](https://manara.edu.sy/index.php?lang=1)
 [![Facebook](https://img.shields.io/badge/Facebook-%231877F2.svg?style=for-the-badge&logo=Facebook&logoColor=white)](https://www.facebook.com/share/1FbUMCjNEs/)
@@ -49,7 +49,7 @@ This repository contains the documentation for the SQ-391 team's robot for the 2
 ### Alhadi Zidan
 
 <p align="center">
-  <img src="./images/team/alhadi-zidan.jpeg" alt="Alhadi Zidan" width="80%">
+  <img src="./other/images/team/alhadi-zidan.jpeg" alt="Alhadi Zidan" width="80%">
 </p>
 
 **Role:** Coach
@@ -63,7 +63,7 @@ This repository contains the documentation for the SQ-391 team's robot for the 2
 ### Ammar Daher
 
 <p align="center">
-  <img src="./images/team/ammar-daher.jpg" alt="Ammar Daher" width="80%">
+  <img src="./other/images/team/ammar-daher.jpg" alt="Ammar Daher" width="80%">
 </p>
 
 **Age:** 21
@@ -75,7 +75,7 @@ This repository contains the documentation for the SQ-391 team's robot for the 2
 ### Lama Alsakher
 
 <p align="center">
-  <img src="./images/team/lama-alsakher.jpg" alt="Lama Alsakher" width="80%">
+  <img src="./other/images/team/lama-alsakher.jpg" alt="Lama Alsakher" width="80%">
 </p>
 
 **Age:** 20
@@ -87,7 +87,7 @@ This repository contains the documentation for the SQ-391 team's robot for the 2
 ### Ibrahim Alsheikh
 
 <p align="center">
-  <img src="./images/team/ibrahim-alsheikh.jpg" alt="Ibrahim Alsheikh" width="80%">
+  <img src="./other/images/team/ibrahim-alsheikh.jpg" alt="Ibrahim Alsheikh" width="80%">
 </p>
 
 **Age:** 20
@@ -99,7 +99,7 @@ This repository contains the documentation for the SQ-391 team's robot for the 2
 ### Team photo
 
 <p align="center">
-  <img src="./images/team/team-image.jpg" alt="Team" width="80%">
+  <img src="./other/images/team/team-image.jpg" alt="Team" width="80%">
 </p>
 
 ## The Challenge <a class="anchor" id="challenge"></a>
@@ -117,12 +117,12 @@ Learn more about the challenge [here](https://wro-association.org/wp-content/upl
 
 ## Photos of our robot <a class="anchor" id="robot-image"></a>
 
-| <img src="./images/robot/front.png" width="90%" /> |  <img src="./images/robot/back.png" width="85%" />  |
+| <img src="./other/images/robot/front.png" width="90%" /> |  <img src="./other/images/robot/back.png" width="85%" />  |
 | :------------------------------------------------: | :-------------------------------------------------: |
 |                      _Front_                       |                       _Back_                        |
-| <img src="./images/robot/left.png" width="90%" />  | <img src="./images/robot/right.png" width="85%" />  |
+| <img src="./other/images/robot/left.png" width="90%" />  | <img src="./other/images/robot/right.png" width="85%" />  |
 |                       _Left_                       |                       _Right_                       |
-|  <img src="./images/robot/top.png" width="90%" />  | <img src="./images/robot/bottom.png" width="85%" /> |
+|  <img src="./other/images/robot/top.png" width="90%" />  | <img src="./other/images/robot/bottom.png" width="85%" /> |
 |                       _Top_                        |                      _Bottom_                       |
 
 <br>
@@ -345,11 +345,11 @@ The separated power architecture prevents motor-induced voltage drops from affec
 
 ## Overall Scheme <a class="anchor" id="overall-scheme"></a>
 
-![Circuit Electronic Scheme](./images/circuit/electronic-scheme.png)
+![Circuit Electronic Scheme](./other/images/circuit/electronic-scheme.png)
 
 ## Wiring Diagram <a class="anchor" id="wiring-diagram"></a>
 
-![Circuit Wiring Scheme](./images/circuit/wiring-diagram.png)
+![Circuit Wiring Scheme](./other/images/circuit/wiring-diagram.png)
 
 ## Assembly List <a class="anchor" id="assembly-list"></a>
 
