@@ -3,8 +3,8 @@
 ![Banner](./images/readme/banner.png)
 
 [![Website](https://img.shields.io/badge/Website-Visit-brightgreen?style=for-the-badge&logo=web&logoColor=white)](https://manara.edu.sy/index.php?lang=1)
-[![Facebook](https://img.shields.io/badge/Facebook-%231877F2.svg?style=for-the-badge&logo=Facebook&logoColor=white)](#)
-[![Instagram](https://img.shields.io/badge/Instagram-%23E4405F.svg?style=for-the-badge&logo=Instagram&logoColor=white)](#)
+[![Facebook](https://img.shields.io/badge/Facebook-%231877F2.svg?style=for-the-badge&logo=Facebook&logoColor=white)](https://www.instagram.com/manarauni?igsh=OWlpZjd6Nm52ZmV3)
+[![Instagram](https://img.shields.io/badge/Instagram-%23E4405F.svg?style=for-the-badge&logo=Instagram&logoColor=white)](https://www.facebook.com/share/1FbUMCjNEs/)
 
 This repository contains the documentation for the SQ-391 team's robot for the 2025 World Robot Olympiad Future Engineers competition. The robot was designed and built by a team of three students and one coach.
 
