@@ -109,7 +109,7 @@ This repository contains the documentation for the SQ-391 team's robot for the 2
 ### Team photo
 
 <p align="center">
-  <img src="./t-photos/official.jpg" alt="Team" width="80%">
+  <img src="./t-photos/Official.jpg" alt="Team" width="80%">
 </p>
 
 ## The Challenge <a class="anchor" id="challenge"></a>
