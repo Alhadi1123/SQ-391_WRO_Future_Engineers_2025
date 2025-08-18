@@ -1,6 +1,6 @@
 <center><h1> SQ-391 WRO 2025 </center>
 
-<img src="./other/figs/logo.jpg" alt="logo" width="60%">
+<img src="./other/figs/logo.png" alt="logo" width="60%">
 
 [![Website](https://img.shields.io/badge/Website-Visit-brightgreen?style=for-the-badge&logo=web&logoColor=white)](https://manara.edu.sy/index.php?lang=1)
 [![Facebook](https://img.shields.io/badge/Facebook-%231877F2.svg?style=for-the-badge&logo=Facebook&logoColor=white)](https://www.facebook.com/share/1FbUMCjNEs/)
