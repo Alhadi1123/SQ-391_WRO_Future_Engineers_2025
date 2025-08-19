@@ -355,11 +355,15 @@ The separated power architecture prevents motor-induced voltage drops from affec
 
 ## Overall Scheme <a class="anchor" id="overall-scheme"></a>
 
-![Circuit Electronic Scheme](./other/images/circuit/electronic-scheme.png)
+<p align="center">
+  <img src="./electrical-diagram/circuit images/wiring diagram.png" alt="logo" width="60%">
+</p>
 
 ## Wiring Diagram <a class="anchor" id="wiring-diagram"></a>
 
-![Circuit Wiring Scheme](./other/images/circuit/wiring-diagram.png)
+<p align="center">
+  <img src="./electrical-diagram/circuit images/wiring diagram_schem.png" alt="logo" width="60%">
+</p>
 
 ## Assembly List <a class="anchor" id="assembly-list"></a>
 
