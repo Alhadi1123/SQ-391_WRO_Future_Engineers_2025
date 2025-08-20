@@ -21,16 +21,16 @@ After downloading Raspberry Pi OS and installing the Imager, you can flash the O
  - Click on "Choose  Storage" option, in the file explorer window select your USB flash drive as the target storage medium.
  - The widnow should have the same configuration as the image below after choosing the flash drive and OS:
      
-      ![MobaXterm](/other/RaspberryPiOS/1.png)<p align="center" Style="font-size:12px; color:grey; font-type:italic;"><i> Figure 1: RaspberryPi Imager </i></p>
+      ![MobaXterm](/other/figs/RaspberryPiOS/1.png)<p align="center" Style="font-size:12px; color:grey; font-type:italic;"><i> Figure 1: RaspberryPi Imager </i></p>
 
  - Now click on the settings icon in the bottom right corner, you will need to enable the SSH option and choose a username and a password (This is necessary because you will use SSH to establish a connection between your device and Raspberry Pi, it will allow you to control the Raspberry Pi remotely).
 
-  ![MobaXterm](/other/RaspberryPiOS/2.png)<p align="center" Style="font-size:12px; color:grey; font-type:italic;"><i> Figure 2: RaspberryPi SSH connection enabling </i></p>
-  ![MobaXterm](/other/RaspberryPiOS/3.png)<p align="center" Style="font-size:12px; color:grey; font-type:italic;"><i> Figure 3: RaspberryPi username and password </i></p>
+  ![MobaXterm](/other/figs/RaspberryPiOS/2.png)<p align="center" Style="font-size:12px; color:grey; font-type:italic;"><i> Figure 2: RaspberryPi SSH connection enabling </i></p>
+  ![MobaXterm](/other/figs/RaspberryPiOS/3.png)<p align="center" Style="font-size:12px; color:grey; font-type:italic;"><i> Figure 3: RaspberryPi username and password </i></p>
 
 - Next, you will need to enter the name of your network and its password, this will allow you to access the Raspberry pi directly and remotely.
    
-   ![MobaXterm](/other/RaspberryPiOS/4.png)<p align="center" Style="font-size:12px; color:grey; font-type:italic;"><i> Figure 4: RaspberryPi network configuration </i></p>
+   ![MobaXterm](/other/figs/RaspberryPiOS/4.png)<p align="center" Style="font-size:12px; color:grey; font-type:italic;"><i> Figure 4: RaspberryPi network configuration </i></p>
 
 - Click on the "Write" button to start the flashing process. Raspberry Pi Imager will download the latest Raspberry Pi OS image and write it to the USB flash drive. This process may take several minutes, depending on your machine.
 Once the flashing process is completed, Raspberry Pi Imager will display a success message.
@@ -47,31 +47,31 @@ we will be using the third option since it is be a lot easier to control your Ra
  - After succefully downloading the software, extract the contents of the downloaded file to a specified folder.
  - The program is ready to be used now, when launching it, a window like that will appear (it should be noted that both the raspberry pi and your device have to be connected to the same network):
 
-   ![MobaXterm](/other/MobaXterm/1.png)<p align="center" Style="font-size:12px; color:grey; font-type:italic;"><i> Figure 5: MobaXterm Interface </i></p>
+   ![MobaXterm](/other/figs/MobaXterm/1.png)<p align="center" Style="font-size:12px; color:grey; font-type:italic;"><i> Figure 5: MobaXterm Interface </i></p>
 
  - Choose Session tab in the top left corner:
 
-   ![Session Option](/other/MobaXterm/2.png)<p align="center" Style="font-size:12px; color:grey; font-type:italic;"><i> Figure 6: Choosing new session </i></p>
+   ![Session Option](/other/figs/MobaXterm/2.png)<p align="center" Style="font-size:12px; color:grey; font-type:italic;"><i> Figure 6: Choosing new session </i></p>
 
  - A new window will appear that contains the settings of the new connection:
 
-   ![Session window](/other/MobaXterm/3.png)<p align="center" Style="font-size:12px; color:grey; font-type:italic;"><i> Figure 7: new session tab </i></p>
+   ![Session window](/other/figs/MobaXterm/3.png)<p align="center" Style="font-size:12px; color:grey; font-type:italic;"><i> Figure 7: new session tab </i></p>
 
  - Click on the SSH icon, we will be using SSH in our work. SSH (Secure Shell) is a network protocol that provides a secure way to access and manage remote systems. It allows to establish a secure encrypted connection between local computer and a remote device, such as a Raspberry Pi in our case.Using SSH to access a Raspberry Pi offers several advantages, as it allows remote access to the Raspberry Pi's command-line interface, providing a convenient and efficient way to manage and configure the device. Through an SSH connection, commands can be executed, files can be transfered, perform system administration tasks without the need for physical access to the Raspberry Pi. Moreover, SSH is particularly useful for headless Raspberry Pi setups, where the device is not connected to a monitor or keyboard. In such cases, SSH enables remote administration, making it possible to configure and control the Raspberry Pi over the network from a different computer.
 
-   ![SSH](/other/MobaXterm/4.png)<p align="center" Style="font-size:12px; color:grey; font-type:italic;"><i> Figure 8: choosing SSH communication  </i></p>
+   ![SSH](/other/figs/MobaXterm/4.png)<p align="center" Style="font-size:12px; color:grey; font-type:italic;"><i> Figure 8: choosing SSH communication  </i></p>
 
 - To establish a connection with the Raspberry Pi, remte host name will be needed, which will be raspberrypi.local (The IP of the Raspberry Pi can also be used, but the domain name raspberrypi.local will work fine). With current Configuration, all commands will be executed through the terminal, to make these operations easier, LXDE desktop will be used as GUI as in the image below:
 
-   ![Settings Configuration](/other/MobaXterm/6.png)<p align="center" Style="font-size:12px; color:grey; font-type:italic;"><i> Figure 9: Remote Host and LXDE Desktop</i></p>
+   ![Settings Configuration](/other/figs/MobaXterm/6.png)<p align="center" Style="font-size:12px; color:grey; font-type:italic;"><i> Figure 9: Remote Host and LXDE Desktop</i></p>
 
 - Now the settings are ready, click ok and it will need the username and password that was set during the setup of the raspberrypi py operating system:
 
-   ![Settings Configuration](/other/MobaXterm/7.png)<p align="center" Style="font-size:12px; color:grey; font-type:italic;"><i> Figure 10:Login window </i></p>
+   ![Settings Configuration](/other/figs/MobaXterm/7.png)<p align="center" Style="font-size:12px; color:grey; font-type:italic;"><i> Figure 10:Login window </i></p>
 
 - After applying the previous steps, connection is succefully established and Raspberry Pi is ready to be used remotely, a new LXDE desktop window will be opened, all subsequent work will be done here:
   
-   ![Settings Configuration](/other/MobaXterm/8.png)<p align="center" Style="font-size:12px; color:grey; font-type:italic;"><i> Figure 11: RaspberryPi LXDE desktop </i></p>
+   ![Settings Configuration](/other/figs/MobaXterm/8.png)<p align="center" Style="font-size:12px; color:grey; font-type:italic;"><i> Figure 11: RaspberryPi LXDE desktop </i></p>
 
 - Update Raspberry Pi, enter the following commands in order, this step make take some time:
 
@@ -87,13 +87,13 @@ we will be using the third option since it is be a lot easier to control your Ra
 
 - The window of Raspberry Pi settings will be opened, use arrow keys to move the cursor between the options. Choose the option with label "Interfacing Options" by pressing "Enter" key:
 
-  ![MobaXterm](/other/RaspberryPiOS/cam1.png)<p align="center" Style="font-size:12px; color:grey; font-type:italic;"><i> Figure 12: Interfacing Options </i></p>
+  ![MobaXterm](/other/figs/RaspberryPiOS/cam1.png)<p align="center" Style="font-size:12px; color:grey; font-type:italic;"><i> Figure 12: Interfacing Options </i></p>
 
 - Now choose camera and press "Enter", the camera is activated now.
   
-    ![MobaXterm](/other/RaspberryPiOS/cam2.png)
+    ![MobaXterm](/other/figs/RaspberryPiOS/cam2.png)
 
-    ![MobaXterm](/other/RaspberryPiOS/cam3.png)<p align="center" Style="font-size:12px; color:grey; font-type:italic;"><i> Figure 13+14:Choosing camera option </i></p>
+    ![MobaXterm](/other/figs/RaspberryPiOS/cam3.png)<p align="center" Style="font-size:12px; color:grey; font-type:italic;"><i> Figure 13+14:Choosing camera option </i></p>
 
 - After finishing the previous steps, press "ESC" to return to the original terminal, and enter the command below:
  
@@ -116,11 +116,11 @@ Connect the Arduino to the Raspberry Pi using a USB cable. In the terminal on th
 
 - After running the chmod command, you should now have the necessary permissions to access the Arduino port, and you are ready to use the arduino with the raspberry pi. To use the Arduino IDE, you can easily access it in the programming tab as in the image below:
    
-   ![Settings Configuration](/other/MobaXterm/34.png)<p align="center" Style="font-size:12px; color:grey; font-type:italic;"><i> Figure 15:Open programming tab and click Arduino icon </i></p>
+   ![Settings Configuration](/other/figs/MobaXterm/34.png)<p align="center" Style="font-size:12px; color:grey; font-type:italic;"><i> Figure 15:Open programming tab and click Arduino icon </i></p>
 
 - A window will open like the one below:
 
-   ![Settings Configuration](/other/MobaXterm/11.png)<p align="center" Style="font-size:12px; color:grey; font-type:italic;"><i> Figure 16:Ardunio IDE interface</i></p>
+   ![Settings Configuration](/other/figs/MobaXterm/11.png)<p align="center" Style="font-size:12px; color:grey; font-type:italic;"><i> Figure 16:Ardunio IDE interface</i></p>
 
 ### Downloading OpenCV PySerial library
 
@@ -137,11 +137,11 @@ We will be using OpenCV library, which stands for (Open Source Computer Vision L
    ``` sudo apt-get install python3-opencv```
 - Wait till the installation is done, when it is done, open any code editor, which can be found in the programming tab:
   
-     ![Settings Configuration](/other/MobaXterm/34.png)<p align="center" Style="font-size:12px; color:grey; font-type:italic;"><i> Figure 17:Open programming tab and click Geany icon</i></p>
+     ![Settings Configuration](/other/figs/MobaXterm/34.png)<p align="center" Style="font-size:12px; color:grey; font-type:italic;"><i> Figure 17:Open programming tab and click Geany icon</i></p>
 
 - Choose Geany code editor for example. Geany is a simple and easy to use code editor (Try searching the internet for more details in case you want to know more), a window like this will be opened:
   
-     ![Settings Configuration](/other/MobaXterm/9.png)<p align="center" Style="font-size:12px; color:grey; font-type:italic;"><i> Figure 18:Geany editor interface </i></p>
+     ![Settings Configuration](/other/figs/MobaXterm/9.png)<p align="center" Style="font-size:12px; color:grey; font-type:italic;"><i> Figure 18:Geany editor interface </i></p>
 
 - Import the library using the following command, and you are ready to use the library:
 
