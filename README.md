@@ -73,7 +73,7 @@ This repository contains the documentation for the SQ-391 team's robot for the 2
 ### Ammar Daher
 
 <p align="center">
-  <img src="./other/images/team/Ammar Daher.png" alt="Ammar Daher" width="80%">
+  <img src="./other/images/Ammar Daher.png" alt="Ammar Daher" width="80%">
 </p>
 
 **Age:** 21
