@@ -59,7 +59,7 @@ This repository contains the documentation for the SQ-391 team's robot for the 2
 ### Alhadi Zidan
 
 <p align="center">
-  <img src="./other/images/team/alhadi-zidan.jpeg" alt="Alhadi Zidan" width="80%">
+  <img src="./other/figs/alhadi-zidan.jpeg" alt="Alhadi Zidan" width="80%">
 </p>
 
 **Role:** Coach
@@ -73,7 +73,7 @@ This repository contains the documentation for the SQ-391 team's robot for the 2
 ### Ammar Daher
 
 <p align="center">
-  <img src="./other/images/Ammar Daher.png" alt="Ammar Daher" width="80%">
+  <img src="./other/figs/Ammar Daher.png" alt="Ammar Daher" width="40%">
 </p>
 
 **Age:** 21
@@ -85,7 +85,7 @@ This repository contains the documentation for the SQ-391 team's robot for the 2
 ### Lama Alsakher
 
 <p align="center">
-  <img src="./other/images/team/lama-alsakher.jpg" alt="Lama Alsakher" width="80%">
+  <img src="./other/figs/lama-alsakher.jpg" alt="Lama Alsakher" width="80%">
 </p>
 
 **Age:** 20
@@ -97,7 +97,7 @@ This repository contains the documentation for the SQ-391 team's robot for the 2
 ### Ibrahim Alsheikh
 
 <p align="center">
-  <img src="./other/images/team/ibrahim-alsheikh.jpg" alt="Ibrahim Alsheikh" width="80%">
+  <img src="./other/figs/ibrahim-alsheikh.jpg" alt="Ibrahim Alsheikh" width="80%">
 </p>
 
 **Age:** 20
