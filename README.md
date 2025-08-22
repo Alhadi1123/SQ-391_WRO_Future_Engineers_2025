@@ -59,7 +59,7 @@ This repository contains the documentation for the SQ-391 team's robot for the 2
 ### Alhadi Zidan
 
 <p align="center">
-  <img src="./other/figs/alhadi-zidan.jpeg" alt="Alhadi Zidan" width="80%">
+  <img src="./other/figs/Alhadi_Zidan.png" alt="Alhadi Zidan" width="40%">
 </p>
 
 **Role:** Coach
