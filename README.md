@@ -127,12 +127,12 @@ Learn more about the challenge [here](https://wro-association.org/wp-content/upl
 
 ## Photos of our robot <a class="anchor" id="robot-image"></a>
 
-| <img src="./other/images/robot/front.png" width="90%" /> |  <img src="./other/images/robot/back.png" width="85%" />  |
+| <img src="./v-photos/front.jpg" width="90%" /> |  <img src="./v-photos/back.jpg" width="85%" />  |
 | :------------------------------------------------: | :-------------------------------------------------: |
 |                      _Front_                       |                       _Back_                        |
-| <img src="./other/images/robot/left.png" width="90%" />  | <img src="./other/images/robot/right.png" width="85%" />  |
+| <img src="./v-photos/left.jpg" width="90%" />  | <img src="./v-photos/right.jpg" width="85%" />  |
 |                       _Left_                       |                       _Right_                       |
-|  <img src="./other/images/robot/top.png" width="90%" />  | <img src="./other/images/robot/bottom.png" width="85%" /> |
+|  <img src="./v-photos/top.jpg" width="90%" />  | <img src="./v-photos/bottom.jpg" width="85%" /> |
 |                       _Top_                        |                      _Bottom_                       |
 
 <br>
