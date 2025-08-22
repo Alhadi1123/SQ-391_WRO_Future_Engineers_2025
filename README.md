@@ -85,7 +85,7 @@ This repository contains the documentation for the SQ-391 team's robot for the 2
 ### Lama Alsakher
 
 <p align="center">
-  <img src="./other/figs/lama.png" alt="Lama Alsakher" width="80%">
+  <img src="./other/figs/lama.png" alt="Lama Alsakher" width="30%">
 </p>
 
 **Age:** 20
