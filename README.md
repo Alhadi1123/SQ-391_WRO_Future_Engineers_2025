@@ -457,6 +457,9 @@ max{d_L(t), d_R(t)} > d_corner ≈ 1.0m
 
 **Control Law:**
 The composite error drives a PD controller for steering commands while maintaining constant forward velocity.
+<p align="center">
+  <img src="./other/figs/CASE1.png" alt="case4" width="48%">
+</p>
 
 ## Computer Vision <a class="anchor" id="computer-vision"></a>
 
