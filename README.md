@@ -97,7 +97,7 @@ This repository contains the documentation for the SQ-391 team's robot for the 2
 ### Ibrahim Alsheikh
 
 <p align="center">
-  <img src="./other/figs/ibrahim-alsheikh.png" alt="Ibrahim Alsheikh" width="80%">
+  <img src="./other/figs/ibrahim-alsheikh.png" alt="Ibrahim Alsheikh" width="40%">
 </p>
 
 **Age:** 20
