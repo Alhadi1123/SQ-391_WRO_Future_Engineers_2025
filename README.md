@@ -516,7 +516,11 @@ cv2.moments(contour)          # Centroid computation
 ### Caching Optimization
 
 After first lap completion, cache per-section pillar configurations to eliminate camera service calls on subsequent laps, reducing latency and computational load.
-
+<p align="center">
+  <img src="./other/figs/RED-RED-PINK.png" alt="case" width="48%">
+  &nbsp;&nbsp;
+  <img src="./other/figs/GREEN-RED.png" alt="case B" width="48%">
+  </p>
 ## Problems We Encountered <a class="anchor" id="problems-we-encountered"></a>
 
 ### Wave Interference
