@@ -34,7 +34,7 @@ This repository contains the documentation for the SQ-391 team's robot for the 2
   - [Wheels](#wheels)
   - [Engineering Principles](#engineering-principles)
 - [Power and Sense Management](#power-and-sense-management)
-  - [Electrical Parts](#electrical-parts)
+  - [Electronic Parts](#electronic-parts)
   - [Overall Circuit Usage](#overall-circuit-usage)
   - [Circuit Grounding](#circuit-grounding)
   - [Power Supply](#power-supply)
@@ -78,7 +78,7 @@ This repository contains the documentation for the SQ-391 team's robot for the 2
 
 **Age:** 21
 
-**Description:** Studying Robotics and Intelligent Systems at AlManara University (fifth year).
+**Description:** Robotics and Intelligent Systems student at AlManara University (fifth year).
 
 ---
 
@@ -90,7 +90,7 @@ This repository contains the documentation for the SQ-391 team's robot for the 2
 
 **Age:** 20
 
-**Description:** Studying Robotics and Intelligent Systems at AlManara University (third year).
+**Description:** Robotics and Intelligent Systems student at AlManara University (third year).
 
 ---
 
@@ -102,7 +102,7 @@ This repository contains the documentation for the SQ-391 team's robot for the 2
 
 **Age:** 20
 
-**Description:** Studying Robotics and Intelligent Systems at AlManara University (third year).
+**Description:** Robotics and Intelligent Systems student at AlManara University (third year).
 
 ---
 
@@ -252,7 +252,7 @@ The DRV8871 H-bridge motor driver provides:
 
 # Power and Sense Management <a class="anchor" id="power-and-sense-management"></a>
 
-## Electrical Parts <a class="anchor" id="electrical-parts"></a>
+## Electronic Parts <a class="anchor" id="electronic-parts"></a>
 
 ### ESP32-WROOM-32E
 
@@ -295,6 +295,14 @@ The DRV8871 H-bridge motor driver provides:
 - **Control:** Two-pin PWM interface (IN1, IN2)
 - **Protection:** Overcurrent, thermal shutdown, UVLO
 
+### URM09 Ultrasonic Sensors
+
+- **Range:** 2-500cm with 1cm resolution
+- **Accuracy:** ≈1% (flat target)
+- **Interface:** Single-wire TDM (trigger/echo)
+- **Rate:** Up to 25Hz measurement rate
+- **Beam Angle:** ~60° directional coverage
+
 ### JSUMO Core DC Motor
 
 - **Voltage:** 6V nominal
@@ -312,13 +320,20 @@ The DRV8871 H-bridge motor driver provides:
 - **Control:** Standard PWM (50Hz)
 - **Gears:** Metal construction for durability
 
-### URM09 Ultrasonic Sensors
+###  Micro Servo Motor SG90
 
-- **Range:** 2-500cm with 1cm resolution
-- **Accuracy:** ≈1% (flat target)
-- **Interface:** Single-wire TDM (trigger/echo)
-- **Rate:** Up to 25Hz measurement rate
-- **Beam Angle:** ~60° directional coverage
+- **Torque:** 1.8kg·cm (0.176Nꞏm) at 4.8V; slightly higher at 6.0V
+- **Speed:** ≈0.12 sec/60° at 4.8V
+- **Voltage:** 4.8-6.0V operating range
+- **Control:** Standard PWM (50Hz)
+- **Gears:** Nylon/plastic gears; not designed for high shock loads
+
+###  PCA9685 Servo Driver Hat
+
+- **Power Supply:** 5V (Pi connector) OR 6V~12V (VIN terminal)
+- **Servo Voltage:** 5V
+- **Control Interface:** I2C
+- **Dimensions:** 65mm x 30mm
 
 ### Power Supply Components
 
