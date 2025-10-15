@@ -265,84 +265,161 @@ The DRV8871 H-bridge motor driver provides:
 
 ### ESP32-WROOM-32E
 
-- **Core:** Dual-core Xtensa LX6 up to 240MHz
-- **Memory:** 520KB SRAM, 4/8/16MB QSPI flash
-- **I/O:** Up to 26 GPIO pins, 3.3V logic
-- **Communication:** 3×UART, 4×SPI, 2×I2C, Wi-Fi, Bluetooth
-- **ADC/DAC:** Two 12-bit SAR ADCs, two 8-bit DACs
+| **Feature** | **Details / Image** |
+|--------------|--------------------|
+| **Core** | Dual-core Xtensa® LX6 up to 240 MHz |
+| **Memory** | 520 KB SRAM, 4 / 8 / 16 MB QSPI flash, optional 2 MB PSRAM |
+| **Wireless** | Wi-Fi 802.11 b/g/n (2.4 GHz), Bluetooth 4.2 + BLE |
+| **I/O** | Up to 26 GPIOs (3.3 V), 2× 12-bit ADC, 2× 8-bit DAC, 10 touch inputs |
+| **Interfaces** | UART × 3, SPI × 4, I²C × 2, I²S, PWM, CAN (TWAI), SD/MMC, Ethernet MAC |
+| **Supply** | 3.0 – 3.6 V (typ. 3.3 V), ≥ 500 mA recommended |
+| **Operating Temp** | −40 °C to 85 °C (105 °C for H variants) |
+| **Programming** | UART-based flashing via CP2102 / CH340 bridge |
+| **Form Factor** | 18 × 25.5 × 3.1 mm, 38 castellated pads |
+| **Image** | <div align="center"><img src="other/figs/ESP32.jpg" alt="ESP32-WROOM-32E" width="250"> |
 
 ### Raspberry Pi 4 Model B
 
-- **Processor:** Broadcom BCM2711, quad-core Cortex-A72 @ 1.5GHz
-- **Memory:** Up to 8GB LPDDR4 with ECC
-- **Connectivity:** Dual-band Wi-Fi, Bluetooth 5.0, Gigabit Ethernet
-- **Ports:** 2×USB 3.0, 2×USB 2.0, 2×micro HDMI (4K support)
-- **GPIO:** Standard 40-pin header
-- **Power:** 5V DC via USB-C (minimum 3A)
+| **Feature** | **Details / Image** |
+|--------------|--------------------|
+| **Processor** | Broadcom BCM2711, quad-core Cortex-A72 (ARM v8) 64-bit SoC @ 1.5 GHz |
+| **Memory** | Up to 8 GB LPDDR4 RAM |
+| **Connectivity** | Dual-band Wi-Fi (2.4/5.0 GHz 802.11b/g/n/ac), Bluetooth 5.0 + BLE, Gigabit Ethernet |
+| **USB Ports** | 2 × USB 3.0, 2 × USB 2.0 |
+| **GPIO** | 40-pin header (backward-compatible with earlier boards) |
+| **Video & Sound** | 2 × micro HDMI (up to 4Kp60), MIPI DSI/CSI, 4-pole audio + video jack |
+| **Multimedia** | H.265 4Kp60 decode, H.264 1080p60 decode / 1080p30 encode, OpenGL ES 3.0 |
+| **Storage** | Micro SD card slot for OS and data |
+| **Power Input** | 5 V DC via USB-C (≥ 3 A) or GPIO header; PoE supported (via PoE HAT) |
+| **Environment** | Operating temperature 0–50 °C; in production until ≥ 2034 |
+| **Image** | <div align="center"><img src="other/figs/raspberry-pi-4.png" alt="Raspberry Pi 4" width="250"> |
 
-### Raspberry Camera Module 3
+### Raspberry Pi Camera Module 3
 
-- **Resolution:** 11.9 Megapixels (4608 x 2592 pixels)
-- **Sensor:** Sony IMX708 with 1.4µm pixel size
-- **Field of View:** 102° horizontal, 67° vertical (75° variant available)
-- **Focus:** Motorized with ~5cm to ∞ depth of field
-- **Features:** HDR support, up to 112s exposure time
+| **Feature** | **Details / Image** |
+|--------------|--------------------|
+| **Sensor** | Sony IMX708, 11.9 MP, 4608 × 2592 px (1/2.43″ optical size) |
+| **Pixel Size** | 1.4 µm × 1.4 µm |
+| **Focus** | Motorized, depth of field ≈ 5 cm – ∞ |
+| **Focal Length** | 2.75 mm, F / 2.2 |
+| **Field of View** | 102° (H) × 67° (V) |
+| **Max Exposure** | 112 s |
+| **Video Modes** | 2304 × 1296 @ 56 fps, 2304 × 1296 @ 30 HDR, 1536 × 864 @ 120 fps |
+| **Size / Weight** | 25 × 24 × 12.4 mm; ≈ 4 g |
+| **NoIR Version** | Unavailable |
+| **Interface** | CSI connector (Raspberry Pi compatible) |
+| **Image** | <div align="center"><img src="other/figs/rasp camera.jpg" alt="Raspberry Pi Camera Module 3" width="250"></div> |
 
-### BNO086 IMU (SparkFun VR IMU Breakout)
 
-- **Sensors:** 3D accelerometer, gyroscope, magnetometer
-- **Processor:** On-chip Cortex-M0+ running SH-2 sensor fusion
-- **Outputs:** Quaternions, linear acceleration, gravity vectors
-- **Interface:** I2C (Qwiic), SPI, UART support
-- **Reports:** 9-axis, 6-axis, geomagnetic rotation vectors
+### BN0086 (Qwiic) IMU Sensor
+
+| **Feature** | **Details / Image** |
+|--------------|--------------------|
+| **Type** | 9-DoF IMU – 3-axis accelerometer, 3-axis gyroscope, 3-axis magnetometer |
+| **Sensor Fusion** | On-chip Cortex-M0+ running SH-2 firmware (quaternion + rotation vector output) |
+| **Interfaces** | I²C (Qwiic, 3.3 V logic, up to 400 kHz), SPI, UART |
+| **I²C Address** | 0x4B (default), optional 0x4A via solder jumper |
+| **Output Data** | Rotation Vector (9-axis), Game Rotation (6-axis), Linear Accel, Gravity, Raw Sensor Data |
+| **Supply Voltage** | 3.3 V (Qwiic connector) |
+| **Interrupt** | INT pin for event-driven reporting; configurable update rate (tens–hundreds Hz) |
+| **Calibration** | Auto gyro/accel bias; magnetometer requires hard/soft-iron calibration |
+| **Mounting** | Align IMU frame (X,Y,Z) with robot frame; minimize vibration and magnetic interference |
+| **Use Case** | Absolute and relative orientation tracking for robotics, mapping, and navigation |
+| **Image** | <div align="center"><img src="other/figs/BNO0866.jpg" alt="BN0086 (Qwiic) IMU Sensor" width="275"></div> |
 
 ### DRV8871 Motor Driver
 
-- **Type:** Single H-bridge with integrated current sensing
-- **Current:** Up to 3.5A continuous, 3.6A peak
-- **Voltage:** 6.5-45V supply range
-- **Control:** Two-pin PWM interface (IN1, IN2)
-- **Protection:** Overcurrent, thermal shutdown, UVLO
+| **Feature** | **Details / Image** |
+|--------------|--------------------|
+| **Type** | Single H-bridge brushed DC motor driver (Texas Instruments) |
+| **Topology** | Full H-bridge using 4 N-MOSFETs; R<sub>DS(on)</sub> ≈ 565 mΩ |
+| **Current Capability** | Up to 3.5 A continuous, 3.6 A peak |
+| **Supply Voltage (VM)** | 6.5 – 45 V |
+| **Control Inputs** | IN1 / IN2 logic pins (forward, reverse, brake, coast) |
+| **Logic Levels** | 0 – 5.5 V; internal pulldowns ≈ 100 kΩ |
+| **PWM Control** | 0 – 200 kHz; effective duty range ≈ 16 – 84 |
+| **Current Regulation** | Integrated sensing; programmable limit via ILIM resistor |
+| **Protections** | UVLO, overcurrent (OCP ≈ 3.7 – 6.4 A), thermal shutdown (TSD) |
+| **Package** | 8-pin HSOP (DDA) with PowerPAD™ (≈ 4.9 × 6.0 mm) — tie pad to GND plane |
+| **Image** | <div align="center"><img src="other/figs/DRV.jpg" alt="DRV8871 Motor Driver" width="250"></div> |
 
-### URM09 Ultrasonic Sensors
 
-- **Range:** 2-500cm with 1cm resolution
-- **Accuracy:** ≈1% (flat target)
-- **Interface:** Single-wire TDM (trigger/echo)
-- **Rate:** Up to 25Hz measurement rate
-- **Beam Angle:** ~60° directional coverage
+### URM09 Ultrasonic (Trig)
 
-### JSUMO Core DC Motor
+| **Feature** | **Details / Image** |
+|--------------|--------------------|
+| **Type** | Ultrasonic distance sensor (single-wire Trig/Echo via TDM) |
+| **Range** | 2 – 500 cm |
+| **Resolution** | 1 cm; Accuracy ≈ 1 |
+| **Measurement Rate** | Up to 25 Hz (Trig variant) |
+| **Interface** | Single digital I/O (Trig + Echo multiplexed) |
+| **Timing** | 10 µs trigger pulse; max echo ≈ 35 ms |
+| **Supply Voltage** | 3.3 – 5.5 V; Current < 20 mA |
+| **Field of View** | ≈ 60° beam angle |
+| **Size** | 47 × 22 mm (3-pin PH2.0 connector: +, –, D) |
+| **Integration Notes** | Fire one sensor at a time; wait > 40 ms between pings to avoid cross-talk |
+| **Image** | <div align="center"><img src="other/figs/URM09.jpg" alt="URM09 Ultrasonic (Trig)" width="250"></div> |
 
-- **Voltage:** 6V nominal
-- **Speed:** 400 RPM no-load
-- **Gear Ratio:** 48:1
-- **Torque:** 1.2 kg·cm continuous, 3.9 kg·cm stall
-- **Current:** 120mA no-load, 3.2A stall
-- **Dimensions:** 47×15×10mm, 21g weight
+### Core DC Motor (6 V, 400 RPM)
+
+| **Feature** | **Details / Image** |
+|--------------|--------------------|
+| **Type** | Brushed DC motor with metal gearbox (carbon brushes) |
+| **Nominal Voltage** | 6 V DC |
+| **Gear Ratio** | 48 : 1 |
+| **No-Load Speed** | ≈ 400 RPM ; No-Load Current ≈ 120 mA |
+| **Torque** | Continuous ≈ 1.2 kg·cm (0.118 N·m), Stall ≈ 3.9 kg·cm (0.382 N·m) |
+| **Stall Current** | ≈ 3.2 A |
+| **Mechanical** | Size ≈ 47 × 15 × 10 mm ; Weight ≈ 21 g ; 3 mm D-shaft (8 mm L) |
+| **Recommended Driver** | H-bridge ≥ 3.2 A peak, PWM speed control (tens kHz range) |
+| **Notes** | Operable up to 15 V (short duration) ; avoid stall for thermal safety |
+| **Image** | <div align="center"><img src="other/figs/core-dc-motor-6v.jpg" alt="Core DC Motor 6V 400RPM" width="250"></div> |
+
 
 ### TowerPro MG996R Servo
 
-- **Torque:** 12.0 kg·cm at 6V
-- **Speed:** 0.2 sec/60° at 6V
-- **Voltage:** 4.8-7.2V operating range
-- **Control:** Standard PWM (50Hz)
-- **Gears:** Metal construction for durability
+| **Feature** | **Details / Image** |
+|--------------|--------------------|
+| **Type** | High-torque, metal-gear hobby servo |
+| **Operating Voltage** | 4.8 V – 7.2 V |
+| **Stall Torque** | 12 kg·cm (at 6 V) |
+| **Speed** | 0.2 s / 60° (at 6 V) |
+| **Control Signal** | Standard PWM (1 – 2 ms pulse width) |
+| **Gear Type** | All-metal gears for durability and strength |
+| **Dimensions** | 40.7 × 19.7 × 42.9 mm ; Weight ≈ 55 g |
+| **Connector** | JR (universal 3-pin type) |
+| **Image** | <div align="center"><img src="other/figs/ll.jpg" alt="TowerPro MG996R Servo" width="250"></div> |
 
-###  Micro Servo Motor SG90
+### Micro Servo Motor SG90
 
-- **Torque:** 1.8kg·cm (0.176Nꞏm) at 4.8V; slightly higher at 6.0V
-- **Speed:** ≈0.12 sec/60° at 4.8V
-- **Voltage:** 4.8-6.0V operating range
-- **Control:** Standard PWM (50Hz)
-- **Gears:** Nylon/plastic gears; not designed for high shock loads
+| **Feature** | **Details / Image** |
+|--------------|--------------------|
+| **Type** | 9 g micro servo with plastic gears and PWM control |
+| **Operating Voltage** | 4.8 – 6.0 V (nominal 5 V) |
+| **Rotation Range** | ≈ 180° mechanical (160–170° usable via PWM) |
+| **Speed** | ≈ 0.12 s / 60° at 4.8 V |
+| **Torque** | ≈ 1.8 kg·cm (0.176 N·m) at 4.8 V |
+| **Current Draw** | 10–15 mA idle, 100–250 mA typical, ≥ 650 mA stall |
+| **Dimensions** | 22.8 × 12.2 × 29.4 mm ; Weight ≈ 9 g |
+| **Control Signal** | 50 Hz PWM (1.0–2.0 ms pulse width, 1.5 ms center) |
+| **Mounting** | Includes horns and screws; Futaba-compatible 21T spline (4.8 mm) |
+| **Image** | <div align="center"><img src="other/figs/tower-pro-sg90.jpg" alt="Micro Servo Motor SG90" width="250"></div> |
 
-###  PCA9685 Servo Driver Hat
+### PCA9685 Servo Driver HAT
 
-- **Power Supply:** 5V (Pi connector) OR 6V~12V (VIN terminal)
-- **Servo Voltage:** 5V
-- **Control Interface:** I2C
-- **Dimensions:** 65mm x 30mm
+| **Feature** | **Details / Image** |
+|--------------|--------------------|
+| **Controller** | PCA9685 – 16-channel, 12-bit PWM generator with I²C interface |
+| **PWM Frequency** | Programmable 24 Hz – 1.5 kHz ; use 50–60 Hz for hobby servos |
+| **Resolution** | 12-bit (4096 steps) → 4.88 µs per step @ 50 Hz |
+| **Servo Rail Voltage** | 5 V (up to 3 A continuous total output) |
+| **Input Power** | 5 V from Pi header (light load) or 6–12 V via VIN (recommended) |
+| **I²C Bus** | 3.3 V logic; default address 0x40; A0–A4 jumpers for stacking (up to 32 devices) |
+| **Isolation** | For high-current servos, cut 0 Ω link and power via VIN while isolating Pi 5 V |
+| **Form Factor** | 65 × 30 mm HAT ; 3 mm mounting holes ; straight or right-angle header variant |
+| **Integration Notes** | Calibrate servo end-stops ; ensure bulk capacitors on 5 V line |
+| **Image** | <div align="center"><img src="other/figs/servo-driver-hat-1.jpg" alt="PCA9685 Servo Driver HAT" width="250"></div> |
+
 
 ### Power Supply Components
 
