@@ -148,39 +148,33 @@ See the <a href='https://youtu.be/qfm-UO4x1vU'> Open Challenge <a/> and the <a h
 
 ## Vehicle Main Body <a class="anchor" id="vehicle-main-body"></a>
 
-The vehicle's chassis is constructed from two precision-cut layers of plexiglass to ensure rigidity, durability, and a lightweight structure. The upper layer accommodates the primary control and processing units, including the microprocessors, controllers, actuators, and the onboard camera. The lower layer is dedicated to the navigation system and electrical circuitry, with optimized component placement to minimize interference and maintain a low center of gravity.
-
-The main processing unit is a **Raspberry Pi 4 Model B**, responsible for executing all high-level operational tasks, sensor data processing, and control algorithms using ROS Noetic. The actuation system includes:
-
-- **TowerPro MG996R Servo Motor** - dedicated to steering actuation with 12.0 kg·cm torque
-- **JSUMO Core DC Motor (6V, 400 RPM)** - responsible for propulsion with 48:1 gear ratio
-- **DRV8871 Motor Driver** - regulates the DC motor's speed and current up to 3.6A peak
+Our robot is a four-wheeled vehicle constructed from two layers of Plexiglass. The upper layer accommodates the primary control and processing units, including the microprocessors, controllers, actuators, and the camera. The lower layer is dedicated to the navigation system and electrical circuit. Sensors and camera are placed in specific positions to detect the surrounding environment.
 
 ### 3D Designed Parts <a class="anchor" id="3d-designed-parts"></a>
 
-We designed all components in SOLIDWORKS and fabricated them using a combination of additive and subtractive manufacturing techniques. The structural parts (base and upper layer) were precision-cut using a CNC laser machine, while functional components were 3D-printed in PLA for lightweight customization.
+All components were designed using SOLIDWORKS. The structural parts (base and upper layer) were precision-cut using a CNC laser machine, while functional components were 3D-printed in PLA.
 
 #### Base Layer
 
-The structural base layer, CNC laser-cut from plexiglass, provides mounting for the Ackermann steering and differential mechanisms on its bottom face and hosts the electronic circuit assembly on its top face.
+A structural base layer that provides mounting for the Ackermann steering and differential mechanisms on its bottom face and hosts the electronic circuit assembly on its top face.
 
-#### Second Layer
+#### Upper Layer
 
-The structural second layer accommodates the Raspberry Pi, ESP32, Power Bank, and camera assembly on its top surface, with DC-DC converters mounted on its underside.
+A structural layer that provides mounting for DC-DC converters on its underside and accommodates the Raspberry Pi, ESP, power bank, and camera assembly on its top surface. It also holds servo motors that rotate ultrasonic sensors.
 
 #### Custom 3D-Printed Components
 
-- **Lego-axle to DC motor axle coupler** - High precision interface connecting DC motor shaft to Lego axle
-- **Ultrasonic Sensor Holder** - Secures ultrasonic sensors to servo motors for directional scanning
-- **Camera Holder** - Two-part assembly with integrated IMU mounting
-- **DC Motor Holder** - Rigid mount with vibration reduction
-- **Support Wall** - Structural connector between chassis layers
+- **Lego-axle to DC motor axle coupler** - High precision interface connecting DC motor shaft to Lego axle.
+- **Ultrasonic Sensor Holder** - Secures ultrasonic sensors to servo motors for directional scanning.
+- **Camera Holder** - Two-part assembly with integrated IMU mounting.
+- **DC Motor Holder** - Rigid mount that fixes the motor to the robot’s structure.
+- **Support Wall** - Structural connector between chassis layers.
 
 ## Motion Mechanism <a class="anchor" id="motion-mechanism"></a>
 
 ### Ackermann Steering Mechanism <a class="anchor" id="ackermann-steering-mechanism"></a>
 
-Our design incorporates an Ackermann steering mechanism for efficient and responsive steering performance. The system minimizes tire slippage during turns by arranging steering linkages so the inner wheel turns at a sharper angle than the outer wheel.
+Our design incorporates an Ackermann steering mechanism for efficient and responsive steering performance. This setup improves handling during turns and helps reduce tire wear by ensuring that each wheel follows its proper path around a corner. The inner wheel turns at a sharper angle than the outer one, allowing the robot to turn more naturally and maintain better traction.
 
 **Key Mathematical Relations:**
 
@@ -200,29 +194,42 @@ SR = θ_input / δ_avg
 
 **Servo Torque:** Required actuator torque:
 
+If M_req is the required steering moment at the road-wheel side, η is the mechanism efficiency (typically 0 <η ≤ 1), then:
+
 ```
 τ_servo ≈ M_req / (SR × η)
 ```
 
+**Turning Radius:**
+
+```
+R ≈ L / tan(δ_avg)
+```
+
 ### Differential Gear <a class="anchor" id="differential-gear"></a>
 
-We implemented a Lego differential gear system that ensures rear wheels can spin at different rates while maintaining balanced power distribution. The differential is crucial during turns when the inner and outer wheels must rotate at different speeds.
+We implemented a Lego differential gear system that ensures rear wheels can spin at different rates while maintaining balanced power distribution. This component plays a crucial role in maintaining smooth and controlled movement, particularly when the robot is turning or when one wheel has less traction than the other. By balancing the torque between both wheels, the differential gear helps prevent skidding and ensures stable movement.
 
 **Components:**
 
 - Ring Gear: Large gear receiving power from the motor
-- Pinion Gear: Smaller gear connecting to drive shaft
-- Side Gears: Two gears linking differential to axle shafts
+- Pinion Gear: Smaller gear connecting to the drive shaft
+- Side Gears: Two gears linking the differential to the axle shafts
 - Spider Gears: Allow wheels to rotate at varying speeds
 
 **Gear Ratio Calculation:**
 
 ```
-GR = R/S1 + R/S2
-N_wheel = N_Motor_no_load / GR
+GR = R/S1 + R/S
 ```
 
 Where R is ring gear teeth, S1 and S2 are side gear teeth.
+
+The wheel speed (N_wheel) can be derived from the motor’s no-load speed (N_Motor_no_load) using the formula:
+
+```
+N_wheel = N_Motor_no_load / GR
+```
 
 ### Motor Driver <a class="anchor" id="motor-driver"></a>
 
@@ -241,7 +248,7 @@ The DRV8871 H-bridge motor driver provides:
 - **Diameter:** 65mm
 - **Width:** 25-30mm
 - **Material:** Rubber tire with plastic hub
-- **Weight:** Lightweight for optimal performance
+- **Weight:** Lightweight for optimal performance (20-21 g)
 - **Coupling:** Compatible with hex connections
 
 ## Engineering Principles <a class="anchor" id="engineering-principles"></a>
@@ -349,7 +356,7 @@ The DRV8871 H-bridge motor driver provides:
 Our power management strategy employs dual power domains:
 
 1. **Control Domain:** Raspberry Pi powered by dedicated USB power bank
-2. **Actuation Domain:** Motors and sensors powered by LiPo battery
+2. **Actuation Domain:** Motors and sensors powered by a LiPo battery
 
 **Current Specifications:**
 
@@ -369,7 +376,7 @@ Proper grounding ensures stable operation by providing a common electrical refer
 
 ## Power Supply <a class="anchor" id="power-supply"></a>
 
-The separated power architecture prevents motor-induced voltage drops from affecting the Raspberry Pi, ensuring uninterrupted control system operation during high-current motor operations.
+The separated power architecture prevents motor-induced voltage drops from affecting the Raspberry Pi, ensuring uninterrupted operation of the control system during high-current motor operations.
 
 ## Overall Scheme <a class="anchor" id="overall-scheme"></a>
 
@@ -502,7 +509,7 @@ cv2.moments(contour)          # Centroid computation
 
 ### Three-Phase Algorithm
 
-1. **Parking Exit:** Navigate from starting position to first corner
+1. **Parking Exit:** Navigate from the starting position to the first corner
 2. **Section Traversal:** Corner-to-corner navigation with pillar avoidance
 3. **Final Parking:** Precise parallel parking maneuver
 
@@ -527,13 +534,13 @@ After first lap completion, cache per-section pillar configurations to eliminate
 
 ### Wave Interference
 
-**Issue:** Ultrasonic sensors interfering when operating simultaneously
+**Issue:** Interference of ultrasonic sensors when operating simultaneously
 **Solution:** Sequential sensor activation - alternating between opposite sides (R1+L2, then R2+L1, then F+B)
 
 ### Mechanical Limitations
 
-**Issue:** Small turn angles and wheel slipping without differential
-**Solution:** Implemented Lego differential gear system for smooth turning
+**Issue:** Small turn angles and wheel slipping without a differential
+**Solution:** Implemented a Lego differential gear system for smooth turning
 
 ### Camera Flickering
 
@@ -566,7 +573,7 @@ After first lap completion, cache per-section pillar configurations to eliminate
 ### Power Management
 
 - **Battery Management System:** Implement BMS for cell monitoring and protection
-- **Custom PCB:** Design integrated board for robust connections and clean wiring
+- **Custom PCB:** Design an integrated board for robust connections and clean wiring
 - **Thermal Management:** Enhanced cooling for sustained operation
 
 ## Computer Vision
