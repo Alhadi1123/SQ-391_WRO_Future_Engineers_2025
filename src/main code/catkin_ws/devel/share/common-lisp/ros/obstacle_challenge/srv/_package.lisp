@@ -1,0 +1,10 @@
+(cl:defpackage obstacle_challenge-srv
+  (:use )
+  (:export
+   "PILLARDETECTION"
+   "<PILLARDETECTION-REQUEST>"
+   "PILLARDETECTION-REQUEST"
+   "<PILLARDETECTION-RESPONSE>"
+   "PILLARDETECTION-RESPONSE"
+  ))
+

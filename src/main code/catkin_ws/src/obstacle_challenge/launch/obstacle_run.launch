@@ -1,0 +1,33 @@
+<!-- 
+Launch file for obstacle challenge robot.
+Starts all main nodes: gyro sensor, ultrasonic sensors, camera, and controller.
+Each node runs in its own process with output displayed on the screen.
+-->
+
+<launch>
+
+    <!-- Node: Gyro Sensor Interface
+         - Uses rosserial to connect a microcontroller (e.g., Arduino) via serial port
+         - Publishes orientation (yaw) data to the 'gyro_sensor' topic
+         - Baud rate set to 115200 for fast communication -->
+	<node name='gyro_sensor' pkg='rosserial_python' type='serial_node.py' output='screen'>
+        <param name="baud" value='115200'/>
+    </node>
+
+    <!-- Node: Ultrasonic Sensor Publisher
+         - Runs a Python script that reads multiple ultrasonic sensors
+         - Publishes distance readings to the 'ultra_sensors' topic -->
+	<node name='ultra_sensors' pkg='obstacle_challenge' type='ultra_pub.py' output='screen'/>
+
+    <!-- Node: Camera Module
+         - Runs the onboard camera node to capture and process video frames
+         - May be used for object detection or visual navigation -->
+	<node name='camera' pkg='obstacle_challenge' type='camera.py' output='screen'/>
+
+    <!-- Node: Main Controller
+         - Core control script (control.py)
+         - Subscribes to gyro and ultrasonic topics
+         - Sends steering and speed commands to servos and DC motors -->
+	<node name='controller' pkg='obstacle_challenge' type='control.py' output='screen'/>
+
+</launch>
