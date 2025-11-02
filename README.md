@@ -631,29 +631,159 @@ cv2.moments(contour)          # Centroid computation
 
 ## Obstacle Challenge <a class="anchor" id="obstacle-challenge"></a>
 
-### Three-Phase Algorithm
+In the Obstacle Challenge, the goal is to exit the parking lot, complete three laps with correct traversal of all pillars, and return to the parking lot without touching the walls and in the shortest possible time. Using ultrasonic and IMU sensors, the robot first leaves the parking area and navigates section by section. At each corner, the robot positions itself at the back-center of the corner section, where the camera system captures an image of the area. During the traversal of each section, the robot maintains a specified threshold from the inner or outer wall according to the detected pillar color and the round direction. It then passes all pillars in sequence while regulating its motion to ensure stable wall following and smooth transitions. After all pillars in a section are traversed, the robot moves to the back-center of the next corner and repeats the same process for the following sections. In the starting section containing the parking lots, the offset is shifted closer to the track center, preventing the robot from touching the parking borders.
 
-1. **Parking Exit:** Navigate from the starting position to the first corner
-2. **Section Traversal:** Corner-to-corner navigation with pillar avoidance
-3. **Final Parking:** Precise parallel parking maneuver
+### Pillar Detection
+
+The following `pillar_detection_client` function implements the main algorithm for detecting the pillars and storing their data in global arrays. 
+
+```python
+def pillar_detection_client():
+    """
+    Call the 'pillar_detection' ROS service to detect pillars.
+    Based on first section or later logic, filter or store the pillars list
+    into pillars_array for further navigation decisions.
+    """
+    global check_pillar, first_section, first_section_color, pillars_array, far_cw_pillar
+    if first_section == 0:
+        # after the first section, wait and call the service
+        rospy.wait_for_service('pillar_detection')
+        try:
+            pillar_detection = rospy.ServiceProxy('pillar_detection', PillarDetection)
+            request = PillarDetectionRequest()
+            response = pillar_detection(request)
+            temp = []
+            n = len(response.pillars)
+            print(f'n: {n}')
+            # Some filtering logic: if too many pillars or disparity is large or with background distance, prune
+            if (n > 2) or ((response.pillars[n-1].distance - response.pillars[0].distance > value)
+                           and response.pillars[0].distance + dists[b] < 90) \
+               or (response.pillars[0].distance + dists[b] >= 90 and n == 2):
+                m = 1 if n == 2 else 2
+                for i in range(m):
+                    temp.append(response.pillars[i])
+            else:
+                for i in range(n):
+                    temp.append(response.pillars[i])
+            pillars_array.append(temp)
+        except rospy.ServiceException as e:
+            print(f"Service call failed: {e}")
+    else:
+        # first section: simpler logic to decide if a pillar is present
+        pillar_detection = rospy.ServiceProxy('pillar_detection', PillarDetection)
+        request = PillarDetectionRequest()
+        response = pillar_detection(request)
+        # threshold distance depending on dir1
+        di = 40 if dir1 == -1 else 90 
+        if len(response.pillars) > 0:
+            # if pillar is “far enough”, set check_pillar = 0 else 1
+            check_pillar = 0 if response.pillars[0].distance > di else 1
+            if di == 90 and response.pillars[0].distance > 40:
+                far_cw_pillar = 1
+            first_section = 0
+            # record the color of the first pillar if in range
+            first_section_color = response.pillars[0].color if response.pillars[0].distance < di else -1
+        else:
+            check_pillar = 0
+            first_section = 0
+        pillars_array.append([])
+```
 
 ### Pillar Avoidance Strategy
 
-**Vision-Based Detection:** Camera service identifies pillar colors and positions
 **Threshold Selection:** Choose inner/outer wall bias based on pillar colors:
 
 - Red pillars → Outer wall preference
 - Green pillars → Inner wall preference
   **Sequential Navigation:** Clear pillars one by one using ultrasonic feedback
 
-### Caching Optimization
+The `pid_control` function maintains the desired thresholds while passing pillars.
 
-After first lap completion, cache per-section pillar configurations to eliminate camera service calls on subsequent laps, reducing latency and computational load.
+```python
+def pid_control(kp1=0.5, kp2=-0.75, kd2=0, speed=max_speed,
+                threshold_dist=15, threshold_angle=0,
+                sens=outer, dists=[15,15,15,15]):
+    """
+    PID-like control combining angular and distance corrections.
+    - sens: which sensor (outer, inner, etc.) to use for lateral distance error.
+    - threshold_dist: target distance from that sensor side.
+    - threshold_angle: desired yaw offset.
+    - kp1 handles angular (yaw) error, kp2 handles distance error.
+    Sets steering by converting corr → steering angle, and moves DC motor.
+    """
+    global prev_dist_err, steering, dist_err
+    # compute lateral distance error (positive or negative depending on side)
+    dist_err = (dists[sens] - threshold_dist) if sens == l else (-dists[sens] + threshold_dist)
+    
+    angle_err = yaw + float(dir1 * sec * 90) - threshold_angle
+    # if yaw error too large, we suppress correction gain
+    if abs(yaw + float(dir1 * sec * 90)) > 60:
+        kp2 = 0
+    
+    corr = (kp1 * (angle_err)
+            + (kp2 * (dist_err) + kd2 * (dist_err - prev_dist_err)) * (abs(dist_err) > 0))
+    # bound corr
+    if corr > 25:
+        corr = 25
+    elif corr < -25:
+        corr = -25
+    steering = steering_angle(corr)
+    move_dc(speed, pi_pwm1, pi_pwm2)
+```
+
 <p align="center">
   <img src="./other/figs/RED-RED-PINK.png" alt="case" width="48%">
   &nbsp;&nbsp;
   <img src="./other/figs/GREEN-RED.png" alt="case B" width="48%">
   </p>
+
+### Performing parallel parking
+
+After completing all sections, the robot performs a parallel-parking maneuver in the designated spot using the final distance to the outer wall and the robot angle as references. Once properly aligned, the robot comes to a full stop, marking the end of the round. 
+
+The `parking` function imitates the real-world cars' movements to perform parallel parking.
+
+```python
+def parking():
+    """
+    The final parking maneuver. Reverse, steer, and align in the parking slot.
+    """
+    global steering
+    steering = min_steering * (dir1 == -1) + max_steering * (dir1 == 1)
+    while abs(yaw + float(dir1 * sec * 90)) < 40:
+        move_dc(-60, pi_pwm1, pi_pwm2)
+    steering = 0
+    stop_dc(0, 0.3)
+    while dists[inner] < 68:
+        move_dc(-60, pi_pwm1, pi_pwm2)
+    steering = max_steering * (dir1 == -1) + min_steering * (dir1 == 1)
+    stop_dc(0, 0.3)
+    while dists[outer] > 5 and dists[b] > 10:
+        pid_control(kp1=-3, kp2=0, kd2=0, speed=-60, threshold_dist=3, threshold_angle=0)
+    d = dists[outer]
+    while dists[inner] < 82 or abs(yaw + float(dir1 * sec * 90)) > 3:
+        prevTime = time.time()
+        while dists[f] < 15 and (dists[inner] < 82 or abs(yaw + float(dir1 * sec * 90)) > 3) and time.time() - prevTime < 0.25:
+            move_dc(-50, pi_pwm1, pi_pwm2)
+            steering = min_steering * (dir1 == -1) + max_steering * (dir1 == 1)
+        prevTime = time.time()
+        while dists[f] < 15 and (dists[inner] < 82 or abs(yaw + float(dir1 * sec * 90)) > 3):
+            move_dc(-50, pi_pwm1, pi_pwm2)
+            steering = max_steering * (dir1 == -1) + min_steering * (dir1 == 1)
+        thresh = dists[inner] + 0.5
+        dis = copy.deepcopy(dists)
+        while dists[f] > 7 and (dists[inner] < 82 or abs(yaw + float(dir1 * sec * 90)) > 3):
+            pid_control(kp1=2, kp2=0, speed=50)
+            dis = copy.deepcopy(dists)
+    while dists[f] < 12:
+        pid_control(kp1=-1.5, kp2=0, kd2=0, speed=-50, threshold_angle=0)
+        flag = 1
+    while dists[f] > 12:
+        pid_control(kp1=1.5, kp2=0, kd2=0, speed=50, threshold_angle=0)
+        flag = -1
+    stop_dc(flag * 50, 0.1)
+    steering = 0
+```
   
 ## Problems We Encountered <a class="anchor" id="problems-we-encountered"></a>
 
