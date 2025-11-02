@@ -45,7 +45,6 @@ This repository contains the documentation for the SQ-391 team's robot for the 2
 - [Obstacle Management](#obstacle-management)
   - [ROS Architecture](#ros-architecture)
   - [Open Challenge](#open-challenge)
-  - [Computer Vision](#computer-vision)
   - [Image Processing](#image-processing)
   - [Obstacle Challenge](#obstacle-challenge)
   - [Problems We Encountered](#problems-we-encountered)
@@ -504,6 +503,12 @@ The separated power architecture prevents motor-induced voltage drops from affec
 
 # Obstacle Management <a class="anchor" id="obstacle-management"></a>
 
+Our main algorithm for both challenges relies on the robot’s ability to move to a specified distance (threshold) from the inner or outer wall and then follow that offset to navigate between sections. We achieve this using ultrasonic sensors mounted on SG90 servos that rotate the sensors to face the wall, as shown in the following figure, providing accurate measurements of the robot’s distance on all four sides. To achieve that, we used an IMU sensor (BNO086) to estimate the robot’s angle during a run. Because we have multiple sensors, actuators, and controllers, our software stack is built with ROS Noetic (ROS 1) on Raspberry Pi OS Bookworm (ARM64), which handles real-time acquisition, synchronization, and processing of all sensor streams.
+
+<p align="center">
+  <img src="./other/figs/CASE1.png" alt="case4" width="48%">
+</p>
+
 ## ROS Architecture <a class="anchor" id="ros-architecture"></a>
 
 Our robot utilizes ROS Noetic for real-time sensor fusion and control:
@@ -518,15 +523,17 @@ Our robot utilizes ROS Noetic for real-time sensor fusion and control:
 
 **Communication:**
 
-- Topics: `/ultra_sensors`, `/imu_sensor`, `/cmd_actuators`
-- Services: `/camera/capture_pillars` for vision processing
+- Topics: `/ultra_sensors`, `/gyro_sensor`
+- Services: `/detect_pillars` for vision processing
 - Parameters: Dynamic reconfiguration for field tuning
 
 ## Open Challenge <a class="anchor" id="open-challenge"></a>
 
+In the Open Challenge, the goal is to complete three laps without touching the walls and in the shortest possible time. We keep the robot centered in the lane by computing the difference between the right and left distance sensors and regulating this error toward zero during navigation. To improve the rate of change of this error, we also regulate the angle error—the difference between the current yaw (robot orientation) and the desired reference. This yields low overshoot when converging to the centerline and smooth motion transitions. To move to the next section, we detect corners using the side ultrasonic sensors, then adjust the desired robot angle reference by ±90° depending on the round direction.
+
 ### Navigation Strategy
 
-We employ a dual-error PID controller combining heading and lateral positioning:
+We employ a dual-error PID controller that regulates the robot's angle and distances from the walls. The `pid_control` function shown below computes the distance error as the difference between the current and desired distances from the inner and outer walls, and the angle error as the difference between the current robot orientation and the desired reference angle. These errors are weighted by their respective proportional gains, kp1 and kp2, to generate a correction value at each control cycle. The final steering angle to be applied is then determined from this correction.
 
 **Error Functions:**
 
@@ -535,46 +542,86 @@ e_θ(t) = wrap(θ(t)) - wrap(θ_ref)
 e_d(t) = d_R(t) - d_L(t)
 ```
 
+```python
+def pid_control(kp1=0.5,kp2=-0.45,kd2=0,speed=max_speed,threshold=0,dists=[30]*4):
+    #PID control loop to adjust steering and maintain distance balance.
+    global prev_dist_err,steering, dist_err
+    dist_err = dists[l] - dists[r]+threshold*dir1
+    angle_err=yaw+float(dir1*sec*90)
+    corr=kp1*(angle_err)+(kp2*(dist_err)+kd2*(dist_err-prev_dist_err))*(abs(dist_err)>0)
+    
+    # Limit correction to safe range
+    corr = max(min(corr,25),-25)
+    
+    steering = steering_angle(corr)
+    print(corr, steering)
+    move_dc(speed,pi_pwm1,pi_pwm2)
+```
+
+
 **Corner Detection:**
 
 ```
 max{d_L(t), d_R(t)} > d_corner ≈ 1.0m
 ```
 
-**Control Law:**
-The composite error drives a PD controller for steering commands while maintaining constant forward velocity.
-<p align="center">
-  <img src="./other/figs/CASE1.png" alt="case4" width="48%">
-</p>
+When the robot reaches the twelfth section, it comes to a full stop based on calibrated distance readings from the front and rear ultrasonic sensors. This process is implemented in the code below.
 
-## Computer Vision <a class="anchor" id="computer-vision"></a>
+```python
+if sec == 12:
+            msg.nums = [0.017,1,1,1]
+            pub.publish(msg)
+            dis = copy.deepcopy(dists)
+            while dists[f]>150 or dists[b]<110:
+                pid_control(speed = 80,dists = dis)
+                dis = copy.deepcopy(dists)
+            stop_dc(0.3)
+            break
+```
 
-### HSV Color Space Selection
+## Image Processing <a class="anchor" id="image-processing"></a>
 
-We use HSV (Hue, Saturation, Value) instead of RGB for robust color detection:
+Our algorithm depends on capturing five key images during the Obstacle Challenge to detect the colors of the pillars facing the robot. We capture one image as we exit the parking area at the start of the run and four images before each section. After collecting the required data from these images, processing is handled by a ROS service node; each time it is called, it returns a list of detected pillars with their attributes (area, centroid, and color).
 
-**Advantages:**
+### Camera Setup
+
+ We adjust the properties of the camera to handle different lighting conditions as described in the following block.
+ 
+ ```python
+ # Initialize PiCamera2
+        self.picam2 = Picamera2()
+        config = self.picam2.create_preview_configuration(main={'size': (3072, 1792)})
+        config['main']['format'] = 'RGB888'  # Use RGB color format
+        config['controls']['ExposureTime'] = 20000  # Manual exposure
+        config['controls']['AnalogueGain'] = 7      # Manual gain
+        self.picam2.configure(config)
+        self.picam2.start()
+```
+
+### Image Preprocessing
+
+Before isolating the pillars to extract information, it is essential to apply preprocessing to the captured images. This step converts the image data into a form that helps us remove distracting elements that might be mistaken for pillars and identify the colors of objects in the game field, such as pillars and parking borders.
+
+#### HSV Color Space Selection
+
+We convert images from RGB to HSV so we can separate color from brightness. In RGB, each channel mixes chromatic information with luminance, so simple thresholds are very sensitive to lighting changes. HSV—Hue, Saturation, and Value—encodes, in order, the perceived color, its purity, and its brightness. This decoupling makes our color-based steps (masking, thresholding, segmentation) far more stable under shadows, glare, and exposure changes. Main advantages of using HSV are:
 
 - **Lighting Independence:** Hue channel unaffected by illumination changes
 - **Intuitive Filtering:** Easy threshold definition for color ranges
 - **Robustness:** Better performance under varying environmental conditions
 
-**Color Thresholds:**
+#### Masking
+
+We use the following **Color Thresholds:**
 
 - **Red Pillars:** Lower: [100, 43, 130], Upper: [141, 255, 255]
 - **Green Pillars:** Lower: [30, 24, 90], Upper: [76, 213, 255]
 - **Pink Parking:** Lower: [122, 87, 181], Upper: [134, 236, 255]
 
-### Image Processing Pipeline <a class="anchor" id="image-processing"></a>
 
-1. **Camera Setup:** Adjust shutter speed for lighting conditions
-2. **Preprocessing:** Frame cropping to remove distracting elements
-3. **Color Masking:** HSV threshold application for color isolation
-4. **Contour Detection:** Boundary identification for object segmentation
-5. **Feature Extraction:** Area, centroid, and bounding rectangle calculation
-6. **Distance Estimation:** Calibrated area-to-distance mapping
+#### Contour Analysis
 
-**Contour Analysis:**
+Contour detection in computer vision is the process of identifying the boundaries or edges of objects within an image. It is fundamental to many image analysis applications, including image segmentation, object recognition, and classification. The cv2 functions we used are mentioned in the following block.
 
 ```python
 cv2.contourArea(contour)      # Object area calculation
