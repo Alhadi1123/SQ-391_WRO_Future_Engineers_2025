@@ -216,6 +216,13 @@ See `pid_tuning_simulation.py` for the full implementation.
 - Parameter sensitivity analysis
 - Performance metrics calculation
 
+**Simulation Results**:<br>
+
+The following figures illustrate the bicycle model PID control and the difference between four different sets of values.
+<p align="center">
+  <img src="/other/figs/Controller_Configuration_Comparison.png" alt="Controller_Configuration_Comparison" width="49%">
+  <img src="/other/figs/Bicycle_Simulation.png" alt="Bicycle_Simulation" width="49%">
+</p>
 ---
 
 ## References
