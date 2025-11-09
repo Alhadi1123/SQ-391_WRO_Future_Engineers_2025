@@ -207,7 +207,7 @@ R ≈ L / tan(δ_avg)
 
 ### Differential Gear <a class="anchor" id="differential-gear"></a>
 
-We implemented a Lego differential gear system that ensures rear wheels can spin at different rates while maintaining balanced power distribution. This component plays a crucial role in maintaining smooth and controlled movement, particularly when the robot is turning or when one wheel has less traction than the other. By balancing the torque between both wheels, the differential gear helps prevent skidding and ensures stable movement.
+We implemented a differential gearbox system that ensures the rear wheels can spin at different rates while maintaining balanced power distribution. This component plays a crucial role in maintaining smooth and controlled movement, particularly when the robot is turning or when one wheel has less traction than the other. By balancing the torque between both wheels, the differential gear helps prevent skidding and ensures stable movement. We started by using LEGO gears, but because of their low stability, we decided to design and illustrate a customized ring gear by 3d printing and implement it in the mechanism. 
 
 **Components:**
 
