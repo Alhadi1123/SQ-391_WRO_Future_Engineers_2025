@@ -4,7 +4,7 @@ Mechanical design files for the **WRO Future Engineers 2025** robot.
 This directory contains laser-cut plates (DXF), 3D-printed parts (STL), and small assembly helpers.
 
 > ▶️ **Building Instructions (YouTube):**  
-> [Watch the full assembly video](https://youtu.be/Kpa7mVVSUx8)  
+> [Watch the full assembly video](https://youtu.be/wnCx0N_8Aeo)  
 
 ---
 
