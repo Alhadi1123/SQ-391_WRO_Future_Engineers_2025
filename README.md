@@ -139,7 +139,7 @@ Learn more about the challenge [here](https://wro-association.org/wp-content/upl
 ## Our video of the robot <a class="anchor" id="video"></a>
 
 <br>
-See the <a href='https://youtu.be/4KCWDdZQ504'> Open Challenge <a/> and the <a href='https://youtu.be/md53USKwSMA'> Obstacle Challenge <a/>
+See the <a href='https://youtu.be/9q8Mh4K1foA'> Open Challenge <a/> and the <a href='https://youtu.be/HPLHJcNXbuk'> Obstacle Challenge <a/>
 
 
 
